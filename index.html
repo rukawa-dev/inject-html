@@ -386,16 +386,13 @@
             <h3 class="item-title">레이어 팝업 모달 샘플 1</h3>
           </div>
           <div class="url-copy-box">
-            <input type="text" class="url-input" value="https://rukawa-dev.github.io/inject-html/26-08-03/test-sample.html" data-path="26-08-03/test-sample.html" readonly onclick="this.select()" />
+            <input type="text" class="url-input" data-path="26-08-03/test-sample.html" readonly onclick="this.select()" />
             <button type="button" class="btn-copy" onclick="copyUrl(this, '26-08-03/test-sample.html')">📋 URL 복사</button>
           </div>
         </div>
         <div class="item-actions">
           <button class="btn btn-primary" onclick="injectSample('26-08-03/test-sample.html')">
             🚀 팝업 테스트 실행
-          </button>
-          <button type="button" class="btn btn-secondary" onclick="openSourceView('26-08-03/test-sample.html')">
-            📄 소스 보기
           </button>
         </div>
       </article>
@@ -411,16 +408,13 @@
             <h3 class="item-title">레이어 팝업 모달 샘플 2</h3>
           </div>
           <div class="url-copy-box">
-            <input type="text" class="url-input" value="https://rukawa-dev.github.io/inject-html/26-07-03/test-sample-2.html" data-path="26-07-03/test-sample-2.html" readonly onclick="this.select()" />
+            <input type="text" class="url-input" data-path="26-07-03/test-sample-2.html" readonly onclick="this.select()" />
             <button type="button" class="btn-copy" onclick="copyUrl(this, '26-07-03/test-sample-2.html')">📋 URL 복사</button>
           </div>
         </div>
         <div class="item-actions">
           <button class="btn btn-emerald" onclick="injectSample('26-07-03/test-sample-2.html')">
             🌿 팝업 테스트 실행
-          </button>
-          <button type="button" class="btn btn-secondary" onclick="openSourceView('26-07-03/test-sample-2.html')">
-            📄 소스 보기
           </button>
         </div>
       </article>
@@ -434,7 +428,18 @@
 
   <script>
     function getFullUrl(relativePath) {
-      const baseUrl = 'https://rukawa-dev.github.io/inject-html/';
+      const isLocal = window.location.hostname === 'localhost' || 
+                      window.location.hostname === '127.0.0.1' || 
+                      window.location.protocol === 'file:';
+      
+      let baseUrl;
+      if (isLocal) {
+        // 로컬 환경 (Live Server, localhost 등)
+        baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+      } else {
+        // 리얼 서버 환경 (GitHub Pages)
+        baseUrl = 'https://rukawa-dev.github.io/inject-html/';
+      }
       return baseUrl + relativePath;
     }
 
@@ -470,45 +475,7 @@
       }
     }
 
-    async function openSourceView(filePath) {
-      const win = window.open('', '_blank');
-      if (!win) return;
-      win.document.write('<!DOCTYPE html><html><head><title>Loading Source Code...</title></head><body style="background:#0f172a;color:#fff;font-family:sans-serif;padding:20px;">소스 코드를 불러오는 중입니다...</body></html>');
-      try {
-        const res = await fetch(filePath);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const code = await res.text();
-        const escaped = code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        win.document.open();
-        win.document.write(`<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>Source: ${filePath}</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
-  <style>
-    body { background: #0f172a; color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 24px; }
-    .header { display: flex; justify-content: space-between; align-items: center; background: #1e293b; padding: 14px 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
-    .title { font-size: 16px; font-weight: 700; color: #38bdf8; font-family: 'Fira Code', monospace; }
-    .copy-btn { background: #6366f1; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-    .copy-btn:hover { background: #4f46e5; }
-    pre { background: #1e293b; border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 14px; line-height: 1.6; color: #e2e8f0; }
-  </style>
-</head>
-<body>
-  <div class="header">
-    <span class="title">📄 ${filePath}</span>
-    <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('code-content').innerText).then(()=>alert('전체 소스코드가 복사되었습니다!'))">📋 전체 코드 복사</button>
-  </div>
-  <pre><code id="code-content">${escaped}</code></pre>
-</body>
-</html>`);
-        win.document.close();
-      } catch (err) {
-        win.document.body.innerHTML = `<p style="color:#ef4444;">소스 코드를 불러오는데 실패했습니다: ${err.message}</p>`;
-      }
-    }
+
 
     async function injectSample(filePath) {
       try {
