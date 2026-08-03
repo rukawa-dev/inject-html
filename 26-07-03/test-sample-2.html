@@ -1,0 +1,333 @@
+<div id="inj_v4m8_overlay" class="inj_v4m8_overlay">
+
+  <!-- Scoped Styles with Unique UID (v4m8) -->
+  <style>
+    #inj_v4m8_overlay.hidden {
+      display: none !important;
+    }
+
+    @keyframes inj_v4m8_fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes inj_v4m8_slideDown {
+      from { opacity: 0; transform: translateY(-20px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Scoped strictly to unique UID overlay */
+    #inj_v4m8_overlay.inj_v4m8_overlay {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      background: rgba(4, 30, 24, 0.75) !important;
+      backdrop-filter: blur(10px) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      z-index: 99999999 !important;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      animation: inj_v4m8_fadeIn 0.25s ease-out !important;
+      padding: 20px !important;
+      box-sizing: border-box !important;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_card {
+      position: relative;
+      width: 100%;
+      max-width: 460px;
+      background: #064e3b;
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      border-radius: 20px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(52, 211, 153, 0.25);
+      overflow: hidden;
+      color: #ecfdf5;
+      animation: inj_v4m8_slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_header {
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(4, 120, 87, 0.4);
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_header_title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_icon {
+      font-size: 22px;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_h3 {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.3px;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_close_btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #a7f3d0;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.2s ease;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_close_btn:hover {
+      background: rgba(239, 68, 68, 0.25);
+      color: #fca5a5;
+      border-color: rgba(239, 68, 68, 0.4);
+      transform: scale(1.05);
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      color: #6ee7b7;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      width: fit-content;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_h4 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_desc {
+      margin: 0;
+      font-size: 14px;
+      color: #a7f3d0;
+      line-height: 1.6;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_desc code {
+      background: rgba(0, 0, 0, 0.25);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #6ee7b7;
+      font-family: monospace;
+      font-size: 13px;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_stats_grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_stat_box {
+      background: rgba(4, 120, 87, 0.35);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_stat_val {
+      font-size: 18px;
+      font-weight: 700;
+      color: #34d399;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_stat_lbl {
+      font-size: 11px;
+      color: #a7f3d0;
+      margin-top: 2px;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_footer {
+      padding: 16px 24px;
+      background: rgba(4, 120, 87, 0.4);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_btn_sec {
+      padding: 9px 18px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #a7f3d0;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_btn_sec:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_btn_pri {
+      padding: 9px 20px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      border: none;
+      color: #ffffff;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+      transition: all 0.2s;
+    }
+
+    #inj_v4m8_overlay .inj_v4m8_btn_pri:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.45);
+    }
+  </style>
+
+  <!-- Modal Card -->
+  <div id="inj_v4m8_card" class="inj_v4m8_card">
+    <!-- Header -->
+    <div class="inj_v4m8_header">
+      <div class="inj_v4m8_header_title">
+        <span class="inj_v4m8_icon">🌿</span>
+        <h3 class="inj_v4m8_h3">에메랄드 팝업 모달</h3>
+      </div>
+      <!-- Close Button (X) -->
+      <button type="button" class="inj_v4m8_close_btn" title="닫기">
+        ✕
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="inj_v4m8_body">
+      <div class="inj_v4m8_badge">
+        🌱 Mint Emerald Theme Sample
+      </div>
+      
+      <h4 class="inj_v4m8_h4">
+        에메랄드 민트 스타일 샘플입니다!
+      </h4>
+      
+      <p class="inj_v4m8_desc">
+        이 샘플은 <code>test-sample.html</code>(인디고 블루)과 완전히 다른 에메랄드/민트 색감의 레이어 모달입니다.<br>
+        고유 UID(<code>inj_v4m8_</code>)를 사용하여 기존 웹페이지 및 다른 샘플과 스타일이 완전히 격리됩니다.
+      </p>
+
+      <!-- Stats Grid -->
+      <div class="inj_v4m8_stats_grid">
+        <div class="inj_v4m8_stat_box">
+          <div class="inj_v4m8_stat_val">100%</div>
+          <div class="inj_v4m8_stat_lbl">격리 안전성</div>
+        </div>
+        <div class="inj_v4m8_stat_box">
+          <div class="inj_v4m8_stat_val">Emerald</div>
+          <div class="inj_v4m8_stat_lbl">컬러 테마</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Actions -->
+    <div class="inj_v4m8_footer">
+      <button type="button" class="inj_v4m8_btn_sec">
+        닫기
+      </button>
+
+      <button type="button" class="inj_v4m8_btn_pri" id="inj_v4m8_btn_confirm">
+        확인
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    console.log('[HTML Injector] Initializing script for inj_v4m8_overlay');
+
+    function initOverlayScript() {
+      const overlay = document.getElementById('inj_v4m8_overlay');
+      if (!overlay) {
+        console.warn('[HTML Injector] inj_v4m8_overlay not found in DOM');
+        return;
+      }
+
+      const closeBtn = overlay.querySelector('.inj_v4m8_close_btn');
+      const secBtn = overlay.querySelector('.inj_v4m8_btn_sec');
+      const confirmBtn = document.getElementById('inj_v4m8_btn_confirm');
+
+      function hideOverlay(reason) {
+        console.log(`[HTML Injector ⚡] Hiding overlay modal (Reason: ${reason})`);
+        overlay.classList.add('hidden');
+        overlay.style.setProperty('display', 'none', 'important');
+      }
+
+      if (closeBtn) {
+        closeBtn.onclick = function(e) {
+          e.stopPropagation();
+          hideOverlay('X Button clicked');
+        };
+      }
+
+      if (secBtn) {
+        secBtn.onclick = function(e) {
+          e.stopPropagation();
+          hideOverlay('Secondary Close Button clicked');
+        };
+      }
+
+      if (confirmBtn) {
+        confirmBtn.onclick = function(e) {
+          e.stopPropagation();
+          console.log('[HTML Injector ⚡] Emerald confirm button clicked');
+          alert('에메랄드 모달 확인 버튼 클릭!');
+        };
+      }
+
+      overlay.onclick = function(e) {
+        if (e.target === overlay) {
+          hideOverlay('Backdrop background clicked');
+        }
+      };
+
+      console.log('[HTML Injector ⚡] Click handlers successfully attached to X button and overlay (inj_v4m8)!');
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initOverlayScript);
+    } else {
+      initOverlayScript();
+    }
+  })();
+</script>
