@@ -15,6 +15,9 @@
       --accent-color: #6366f1;
       --accent-hover: #4f46e5;
       --accent-glow: rgba(99, 102, 241, 0.25);
+      --emerald-color: #10b981;
+      --emerald-hover: #059669;
+      --emerald-glow: rgba(16, 185, 129, 0.25);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -167,6 +170,11 @@
       border-radius: 6px;
     }
 
+    .card-date.green {
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.15);
+    }
+
     .card-title {
       font-size: 1.15rem;
       font-weight: 700;
@@ -207,6 +215,17 @@
     }
 
     .btn-primary:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    .btn-emerald {
+      background: linear-gradient(135deg, var(--emerald-color), var(--emerald-hover));
+      color: #fff;
+      box-shadow: 0 4px 12px var(--emerald-glow);
+    }
+
+    .btn-emerald:hover {
       opacity: 0.95;
       transform: translateY(-1px);
     }
@@ -298,11 +317,11 @@
       <article class="card">
         <div class="card-header">
           <span class="card-date">26-08-03</span>
-          <span class="badge">Modal Overlay</span>
+          <span class="badge">Modal Overlay v1</span>
         </div>
-        <h3 class="card-title">레이어 팝업 모달 샘플</h3>
+        <h3 class="card-title">레이어 팝업 모달 샘플 1</h3>
         <p class="card-desc">
-          다크모드 글래스모피즘 스타일이 적용된 반투명 배경 레이어 팝업 스니펫입니다. 닫기 액션 및 입력 필드가 포함되어 있습니다.
+          인디고 테마 다크모드 글래스모피즘 레이어 팝업 스니펫입니다. 닫기 액션 및 입력 필드가 포함되어 있습니다.
         </p>
         <div class="card-actions">
           <button class="btn btn-primary" onclick="injectSample('26-08-03/test-sample.html')">
@@ -313,22 +332,43 @@
           </a>
         </div>
       </article>
+
+      <!-- Item 2: 26-07-03/test-sample-2.html -->
+      <article class="card">
+        <div class="card-header">
+          <span class="card-date green">26-07-03</span>
+          <span class="badge" style="border-color: rgba(16,185,129,0.3); color: #6ee7b7; background: rgba(16,185,129,0.12);">Modal Overlay v2</span>
+        </div>
+        <h3 class="card-title">레이어 팝업 모달 샘플 2</h3>
+        <p class="card-desc">
+          에메랄드 테마 슬라이드다운 애니메이션 레이어 팝업 스니펫입니다. 독립된 고유 Namespace(v4m8)가 적용되어 있습니다.
+        </p>
+        <div class="card-actions">
+          <button class="btn btn-emerald" onclick="injectSample('26-07-03/test-sample-2.html')">
+            🌿 팝업 테스트 실행
+          </button>
+          <a class="btn btn-secondary" href="26-07-03/test-sample-2.html" target="_blank">
+            📄 소스 보기
+          </a>
+        </div>
+      </article>
     </div>
 
     <section class="sandbox-container">
       <div class="sandbox-header">
-        <span class="sandbox-title">ℹ️ GitHub Pages 연동 안내</span>
+        <span class="sandbox-title">⚠️ Setup Pages 에러 해결 방법 (필수 설정 1회)</span>
       </div>
       <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
-        이 저장소는 GitHub Pages 자동 배포 Workflow가 포함되어 있습니다.<br>
-        GitHub 저장소 <strong>Settings &gt; Pages &gt; Build and deployment &gt; Source</strong>에서 
-        <code>GitHub Actions</code> 또는 <code>Deploy from a branch (main / root)</code>로 설정하면 
-        무료로 정적 호스팅이 활성화됩니다.
+        GitHub Actions 빌드 단계에서 <code>HttpError: Not Found - .../pages#get-a-apiname-pages-site</code> 에러가 발생하는 이유는 
+        GitHub 저장소 설정에서 Pages가 활성화되지 않았기 때문입니다.<br><br>
+        <strong>해결 방법:</strong><br>
+        1. GitHub 웹사이트의 <strong>inject-html</strong> 저장소 페이지로 이동합니다.<br>
+        2. ⚙️ <strong>Settings</strong> &gt; 📑 <strong>Pages</strong> 메뉴를 클릭합니다.<br>
+        3. <strong>Build and deployment</strong> 섹션의 <strong>Source</strong> 드롭다운 메뉴에서 <strong><code>GitHub Actions</code></strong>를 선택합니다.<br>
+        4. 선택 후 저장하면 워크플로우가 재실행되면서 정상적으로 배포됩니다.
       </p>
     </section>
   </main>
-
-  <div id="injection-root"></div>
 
   <footer>
     <p>© 2026 rukawa-dev / inject-html. Hosted on <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.</p>
@@ -342,11 +382,8 @@
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         const html = await res.text();
         
-        // Remove existing sample container if present
-        const oldContainer = document.getElementById('inj_u9k2_overlay');
-        if (oldContainer) {
-          oldContainer.remove();
-        }
+        // Remove existing sample overlays if present
+        document.querySelectorAll('.inj_u9k2_overlay, .inj_v4m8_overlay').forEach(el => el.remove());
 
         const range = document.createRange();
         range.selectNode(document.body);
