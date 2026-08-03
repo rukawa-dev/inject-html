@@ -127,75 +127,94 @@
       gap: 10px;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 1.5rem;
+    /* 1 Column N Rows List Container */
+    .sample-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
       margin-bottom: 3rem;
+      width: 100%;
     }
 
-    .card {
+    .list-item {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
       border-radius: 16px;
-      padding: 1.5rem;
+      padding: 1.25rem 1.75rem;
       transition: all 0.25s ease;
       display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(99, 102, 241, 0.4);
-      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
-    }
-
-    .card-header {
-      display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1rem;
+      gap: 1.5rem;
+      width: 100%;
     }
 
-    .card-date {
+    .list-item:hover {
+      transform: translateX(4px);
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-glow);
+    }
+
+    .item-main {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .item-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .item-date {
       font-size: 0.75rem;
       font-family: var(--font-mono);
       color: #818cf8;
       background: rgba(99, 102, 241, 0.15);
       padding: 2px 8px;
       border-radius: 6px;
+      white-space: nowrap;
     }
 
-    .card-date.green {
+    .item-date.green {
       color: #34d399;
       background: rgba(16, 185, 129, 0.15);
     }
 
-    .card-title {
+    .item-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .item-title {
       font-size: 1.15rem;
       font-weight: 700;
       color: #fff;
-      margin-bottom: 0.5rem;
     }
 
-    .card-desc {
+    .item-desc {
       font-size: 0.9rem;
       color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      flex: 1;
+      line-height: 1.5;
     }
 
-    .card-actions {
+    .item-actions {
       display: flex;
+      align-items: center;
       gap: 0.75rem;
+      flex-shrink: 0;
     }
 
     .btn {
-      padding: 0.6rem 1.1rem;
+      padding: 0.65rem 1.25rem;
       border-radius: 10px;
       font-size: 0.875rem;
       font-weight: 600;
@@ -206,6 +225,7 @@
       gap: 6px;
       transition: all 0.2s ease;
       border: none;
+      white-space: nowrap;
     }
 
     .btn-primary {
@@ -241,27 +261,6 @@
       color: #fff;
     }
 
-    /* Sandbox preview container */
-    .sandbox-container {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .sandbox-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    .sandbox-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-
     .status-dot {
       width: 8px;
       height: 8px;
@@ -286,6 +285,24 @@
 
     footer a:hover {
       text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .list-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.25rem;
+      }
+
+      .item-actions {
+        width: 100%;
+      }
+
+      .item-actions .btn {
+        flex: 1;
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -312,18 +329,22 @@
 
     <h2 class="section-title">📂 등록된 주입 샘플 목록</h2>
     
-    <div class="grid">
+    <div class="sample-list">
       <!-- Item 1: 26-08-03/test-sample.html -->
-      <article class="card">
-        <div class="card-header">
-          <span class="card-date">26-08-03</span>
-          <span class="badge">Modal Overlay v1</span>
+      <article class="list-item">
+        <div class="item-main">
+          <div class="item-meta">
+            <span class="item-date">26-08-03</span>
+            <span class="badge">Modal Overlay v1</span>
+          </div>
+          <div class="item-title-group">
+            <h3 class="item-title">레이어 팝업 모달 샘플 1</h3>
+          </div>
+          <p class="item-desc">
+            인디고 테마 다크모드 글래스모피즘 레이어 팝업 스니펫입니다. 닫기 액션 및 입력 필드가 포함되어 있습니다.
+          </p>
         </div>
-        <h3 class="card-title">레이어 팝업 모달 샘플 1</h3>
-        <p class="card-desc">
-          인디고 테마 다크모드 글래스모피즘 레이어 팝업 스니펫입니다. 닫기 액션 및 입력 필드가 포함되어 있습니다.
-        </p>
-        <div class="card-actions">
+        <div class="item-actions">
           <button class="btn btn-primary" onclick="injectSample('26-08-03/test-sample.html')">
             🚀 팝업 테스트 실행
           </button>
@@ -334,16 +355,20 @@
       </article>
 
       <!-- Item 2: 26-07-03/test-sample-2.html -->
-      <article class="card">
-        <div class="card-header">
-          <span class="card-date green">26-07-03</span>
-          <span class="badge" style="border-color: rgba(16,185,129,0.3); color: #6ee7b7; background: rgba(16,185,129,0.12);">Modal Overlay v2</span>
+      <article class="list-item">
+        <div class="item-main">
+          <div class="item-meta">
+            <span class="item-date green">26-07-03</span>
+            <span class="badge" style="border-color: rgba(16,185,129,0.3); color: #6ee7b7; background: rgba(16,185,129,0.12);">Modal Overlay v2</span>
+          </div>
+          <div class="item-title-group">
+            <h3 class="item-title">레이어 팝업 모달 샘플 2</h3>
+          </div>
+          <p class="item-desc">
+            에메랄드 테마 슬라이드다운 애니메이션 레이어 팝업 스니펫입니다. 독립된 고유 Namespace(v4m8)가 적용되어 있습니다.
+          </p>
         </div>
-        <h3 class="card-title">레이어 팝업 모달 샘플 2</h3>
-        <p class="card-desc">
-          에메랄드 테마 슬라이드다운 애니메이션 레이어 팝업 스니펫입니다. 독립된 고유 Namespace(v4m8)가 적용되어 있습니다.
-        </p>
-        <div class="card-actions">
+        <div class="item-actions">
           <button class="btn btn-emerald" onclick="injectSample('26-07-03/test-sample-2.html')">
             🌿 팝업 테스트 실행
           </button>
@@ -353,7 +378,6 @@
         </div>
       </article>
     </div>
-
 
   </main>
 
