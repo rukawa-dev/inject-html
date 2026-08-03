@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inject HTML - GitHub Pages Preview Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0b0f19 0%, #111827 50%, #0f172a 100%);
+      --card-bg: rgba(30, 41, 59, 0.6);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-color: #6366f1;
+      --accent-hover: #4f46e5;
+      --accent-glow: rgba(99, 102, 241, 0.25);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'Fira Code', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 2.5rem 2rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 8px 16px var(--accent-glow);
+    }
+
+    .brand-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(to right, #ffffff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #a5b4fc;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      flex: 1;
+    }
+
+    .hero {
+      margin-bottom: 3rem;
+    }
+
+    .hero h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.025em;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 680px;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .card-date {
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      color: #818cf8;
+      background: rgba(99, 102, 241, 0.15);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      padding: 0.6rem 1.1rem;
+      border-radius: 10px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+      color: #fff;
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    /* Sandbox preview container */
+    .sandbox-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .sandbox-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .sandbox-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 10px #10b981;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    footer a {
+      color: #818cf8;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="brand-icon">⚡</div>
+      <div class="brand-title">Inject HTML Hub</div>
+    </div>
+    <div class="badge">
+      <span class="status-dot"></span> GitHub Pages Ready
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>웹 HTML 주입 스니펫 프리뷰 Hub</h1>
+      <p>
+        GitHub Pages로 호스팅되는 동적 웹 페이지 레이어 팝업 및 HTML 주입 스니펫 모음입니다.
+        원하는 항목의 프리뷰를 확인하거나 직접 소스 코드를 불러올 수 있습니다.
+      </p>
+    </section>
+
+    <h2 class="section-title">📂 등록된 주입 샘플 목록</h2>
+    
+    <div class="grid">
+      <!-- Item 1: 26-08-03/test-sample.html -->
+      <article class="card">
+        <div class="card-header">
+          <span class="card-date">26-08-03</span>
+          <span class="badge">Modal Overlay</span>
+        </div>
+        <h3 class="card-title">레이어 팝업 모달 샘플</h3>
+        <p class="card-desc">
+          다크모드 글래스모피즘 스타일이 적용된 반투명 배경 레이어 팝업 스니펫입니다. 닫기 액션 및 입력 필드가 포함되어 있습니다.
+        </p>
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="injectSample('26-08-03/test-sample.html')">
+            🚀 팝업 테스트 실행
+          </button>
+          <a class="btn btn-secondary" href="26-08-03/test-sample.html" target="_blank">
+            📄 소스 보기
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <section class="sandbox-container">
+      <div class="sandbox-header">
+        <span class="sandbox-title">ℹ️ GitHub Pages 연동 안내</span>
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
+        이 저장소는 GitHub Pages 자동 배포 Workflow가 포함되어 있습니다.<br>
+        GitHub 저장소 <strong>Settings &gt; Pages &gt; Build and deployment &gt; Source</strong>에서 
+        <code>GitHub Actions</code> 또는 <code>Deploy from a branch (main / root)</code>로 설정하면 
+        무료로 정적 호스팅이 활성화됩니다.
+      </p>
+    </section>
+  </main>
+
+  <div id="injection-root"></div>
+
+  <footer>
+    <p>© 2026 rukawa-dev / inject-html. Hosted on <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.</p>
+  </footer>
+
+  <script>
+    async function injectSample(filePath) {
+      try {
+        console.log('Fetching file:', filePath);
+        const res = await fetch(filePath);
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const html = await res.text();
+        
+        // Remove existing sample container if present
+        const oldContainer = document.getElementById('inj_u9k2_overlay');
+        if (oldContainer) {
+          oldContainer.remove();
+        }
+
+        const range = document.createRange();
+        range.selectNode(document.body);
+        const fragment = range.createContextualFragment(html);
+        document.body.appendChild(fragment);
+      } catch (err) {
+        console.error('Failed to inject sample HTML:', err);
+        alert('샘플 HTML을 불러오는데 실패했습니다: ' + err.message);
+      }
+    }
+  </script>
+</body>
+</html>
