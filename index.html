@@ -386,7 +386,7 @@
             <h3 class="item-title">레이어 팝업 모달 샘플 1</h3>
           </div>
           <div class="url-copy-box">
-            <input type="text" class="url-input" data-path="26-08-03/test-sample.html" readonly onclick="this.select()" />
+            <input type="text" class="url-input" value="https://rukawa-dev.github.io/inject-html/26-08-03/test-sample.html" data-path="26-08-03/test-sample.html" readonly onclick="this.select()" />
             <button type="button" class="btn-copy" onclick="copyUrl(this, '26-08-03/test-sample.html')">📋 URL 복사</button>
           </div>
         </div>
@@ -411,7 +411,7 @@
             <h3 class="item-title">레이어 팝업 모달 샘플 2</h3>
           </div>
           <div class="url-copy-box">
-            <input type="text" class="url-input" data-path="26-07-03/test-sample-2.html" readonly onclick="this.select()" />
+            <input type="text" class="url-input" value="https://rukawa-dev.github.io/inject-html/26-07-03/test-sample-2.html" data-path="26-07-03/test-sample-2.html" readonly onclick="this.select()" />
             <button type="button" class="btn-copy" onclick="copyUrl(this, '26-07-03/test-sample-2.html')">📋 URL 복사</button>
           </div>
         </div>
@@ -438,15 +438,20 @@
       return baseUrl + relativePath;
     }
 
-    // Initialize full URLs on load
-    document.addEventListener('DOMContentLoaded', () => {
+    function initUrls() {
       document.querySelectorAll('.url-input').forEach(input => {
         const path = input.getAttribute('data-path');
         if (path) {
           input.value = getFullUrl(path);
         }
       });
-    });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initUrls);
+    } else {
+      initUrls();
+    }
 
     async function copyUrl(btn, relativePath) {
       const fullUrl = getFullUrl(relativePath);
